@@ -14,4 +14,8 @@ spec:
       - path: /
         backend:
           serviceName: canary-demo-preview
-          servicePort: 80
+          servicePort: 443
+  tls:
+  - hosts:
+      - argocd-canary-preview.havelsan.com.tr
+    secretName: argocd-server-tls
