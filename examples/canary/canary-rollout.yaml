@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: canary-demo
 spec:
-  replicas: 5
+  replicas: 4
   revisionHistoryLimit: 1
   selector:
     matchLabels:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: canary-demo
-        image: argoproj/rollouts-demo:red
+        image: argoproj/rollouts-demo:blue
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -25,11 +25,9 @@ spec:
     canary:
       canaryService: canary-demo-preview
       steps:
-      - setWeight: 20
+      - setWeight: 25
       - pause: {duration: 1m}
-      - setWeight: 40
+      - setWeight: 50
       - pause: {duration: 1m}
-      - setWeight: 60
-      - pause: {duration: 1m}
-      - setWeight: 80
+      - setWeight: 75
       - pause: {duration: 1m}
